@@ -31,8 +31,8 @@ type Deck struct {
 	nextCard  int
 }
 
-func newDeck() *Deck {
-	d := &Deck{
+func newDeck() Deck {
+	d := Deck{
 		Cards:     makeCards(),
 		drawOrder: rand.Perm(CardCount),
 		nextCard:  0,

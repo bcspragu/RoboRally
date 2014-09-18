@@ -1,9 +1,9 @@
 package robo
 
-type Space int
+type GridType int
 
 const (
-	Open Space = iota
+	Open GridType = iota
 	Pit
 	Wall
 	Conveyor
@@ -13,3 +13,12 @@ const (
 	Flag
 	Repair
 )
+
+type Space interface {
+	Deadly() bool
+	Moves(p Player, g Game) Location
+}
+
+type Board struct {
+	Spaces [][]Space
+}
