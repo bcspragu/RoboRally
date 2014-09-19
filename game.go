@@ -1,5 +1,9 @@
 package robo
 
+import (
+	"errors"
+)
+
 type Phase int
 
 // These are just straight up wrong, fix them
@@ -17,7 +21,7 @@ type Game struct {
 	GamePhase Phase
 }
 
-func newGame(numPlayers int) *Game {
+func newGame() *Game {
 	g := &Game{
 		GameBoard: Board{},
 		GameDeck:  newDeck(),
@@ -25,4 +29,13 @@ func newGame(numPlayers int) *Game {
 		GamePhase: Deal,
 	}
 	return g
+}
+
+func (g *Game) addPlayer(p Player) error {
+	if len(g.Players) < 8 {
+		g.Players = append(g.Players, p)
+	} else {
+		return errors.New("Too many players")
+	}
+	return nil
 }
